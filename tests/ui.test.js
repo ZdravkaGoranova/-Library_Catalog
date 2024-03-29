@@ -115,12 +115,71 @@ test('Submit the Form with Empty Input Fields', async ({ page }) => {
     page.on('dialog', async dialog => {
         expect(dialog.type()).toContain('alert');
         expect(dialog.message()).toContain('All fields are required!');
-    await dialog.accept();
+        await dialog.accept();
     })
-
     await page.$('a[href="/login"]');
     expect(page.url()).toBe('http://localhost:3000/login');
-
 });
+
+//Submit the Form with Empty Email Input Field 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Password Input Field 
+// test('', async ({ }) => { });
+
+//Register Page
+
+//Submit the Form with Valid Values 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Values 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Email 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Password
+// test('', async ({ }) => { });
+//Submit the Form with Empty Confirm Password 
+// test('', async ({ }) => { });
+//Submit the Form with Different Passwords 
+
+//Add Book" Page 
+//Submit the Form with Correct Data 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Title Field 
+// test('', async ({ }) => { });
+//Submit the Form with Empty Description Field 
+
+// test('', async ({ }) => { });
+//Submit the Form with Empty Image URL Field 
+// test('', async ({ }) => { });
+
+//"All Books" Page 
+
+//Verify That All Books Are Displayed 
+// test('', async ({ }) => { });
+//Verify That No Books Are Displayed 
+// test('', async ({ }) => { });
+
+//"Details" Page 
+
+//Verify That Logged-In User Sees Details Button and Button Works Correctly 
+// test('', async ({ }) => { });
+//Verify That Guest User Sees Details Button and Button Works Correctly 
+// test('', async ({ }) => { });
+//Verify That All Info Is Displayed Correctly 
+// test('', async ({ }) => { });
+//Verify If Edit and Delete Buttons Are Visible for Creator 
+// test('', async ({ }) => { });
+//Verify If Edit and Delete Buttons Are Not Visible for Non-Creator 
+// test('', async ({ }) => { });
+//Verify If Like Button Is Not Visible for Creator 
+// test('', async ({ }) => { });
+//Verify If Like Button Is Visible for Non-Creator 
+// test('', async ({ }) => { });
+
+//"Logout" Functionality 
+
+//Verify That the "Logout" Button Is Visible 
+// test('', async ({ }) => { });
+//Verify That the "Logout" Button Redirects Correctly
+// test('', async ({ }) => { });
 // test('', async ({ }) => { });
 // test('', async ({ }) => { });
