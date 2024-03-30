@@ -50,22 +50,6 @@ test('Verify That the "All Books" Link Is Visible after login', async ({ page })
 
 });
 
-//Verify That the "My Books" Link Is Visible  after user login
-test('Verify That the "My Books" Link Is Visible after user login', async ({ page }) => {
-    await page.goto('http://localhost:3000/login');
-    await page.waitForSelector('nav.navbar');
-
-    await page.fill('#email', 'petar@abv.bg');
-    await page.fill('#password', '123456');
-    await page.click('input[type="submit"]');
-
-    await page.waitForSelector('a[href="/profile"]', { timeout: 60000 });
-
-    const myBooksButton = await page.$('a[href="/profile"]');
-    const isMyBooksButtonVisible = await myBooksButton.isVisible();
-    expect(isMyBooksButtonVisible).toBe(true);
-});
-
 //Verify That the "Add Book" Link Is Visible  after user login
 test('Verify That the "My Books" Link Is Visible  after user login', async ({ page }) => {
     await page.goto('http://localhost:3000/login');
@@ -76,6 +60,7 @@ test('Verify That the "My Books" Link Is Visible  after user login', async ({ pa
     await page.click('input[type="submit"]');
 
     // await page.waitForSelector('a.button[href="/profile"]', { state: 'visible' });
+    // await page.waitForSelector('a[href="/profile"]', { timeout: 60000 });
 
     // const addBookButton = await page.$('a[href="/profile"]');
     const myBooksButton = await page.$('a.button[href="/profile"]');
