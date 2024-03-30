@@ -2,6 +2,9 @@
 import { test, expect } from '@playwright/test';
 // const { test, expect } =require('@playwright/test');
 
+// const timeout = 60000;
+// test.use({ timeout });
+
 //Verify That the "All Books" Link Is Visible 
 test('Verify "All Books" link is visible', async ({ page }) => {
     await page.goto('http://localhost:3000/');
@@ -32,7 +35,6 @@ test('Verify That the "Register" Button Is Visible', async ({ page }) => {
     expect(isRegisterIsVisible).toBe(true);
 });
 
-
 //Verify That the "All Books" Link Is Visible after login
 test('Verify That the "All Books" Link Is Visible after login', async ({ page }) => {
     await page.goto('http://localhost:3000/login');
@@ -47,55 +49,58 @@ test('Verify That the "All Books" Link Is Visible after login', async ({ page })
     expect(isAllBooksLinkIsVisible).toBe(true);
 
 });
+
 //Verify That the "My Books" Link Is Visible  after user login
-// test('Verify That the "My Books" Link Is Visible after user login', async ({ page }) => {
-//     await page.goto('http://localhost:3000/login');
-//     await page.waitForSelector('nav.navbar');
+test('Verify That the "My Books" Link Is Visible after user login', async ({ page }) => {
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('nav.navbar');
 
-//     await page.fill('#email', 'petar@abv.bg');
-//     await page.fill('#password', '123456');
-//     await page.click('input[type="submit"]');
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+    await page.click('input[type="submit"]');
 
-//     await page.waitForSelector('a[href="/profile"]', { timeout: 60000 });
+    await page.waitForSelector('a[href="/profile"]', { timeout: 60000 });
 
-//     const myBooksButton = await page.$('a[href="/profile"]');
-//     const isMyBooksButtonVisible = await myBooksButton.isVisible();
-//     expect(isMyBooksButtonVisible).toBe(true);
-// });
+    const myBooksButton = await page.$('a[href="/profile"]');
+    const isMyBooksButtonVisible = await myBooksButton.isVisible();
+    expect(isMyBooksButtonVisible).toBe(true);
+});
 
 //Verify That the "Add Book" Link Is Visible  after user login
-// test('Verify That the "Add Book" Link Is Visible after user login', async ({ page }) => {
-//     await page.goto('http://localhost:3000/login');
-//     await page.waitForSelector('nav.navbar');
+test('Verify That the "My Books" Link Is Visible  after user login', async ({ page }) => {
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('nav.navbar');
 
-//     await page.fill('#email', 'petar@abv.bg');
-//     await page.fill('#password', '123456');
-//     await page.click('input[type="submit"]');
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+    await page.click('input[type="submit"]');
 
-//     await page.waitForSelector('a[href="/create"]');
+    // await page.waitForSelector('a.button[href="/profile"]', { state: 'visible' });
 
-//     const addBookButton = await page.$('a[href="/create"]');
-//     const isAddBookButtonVisible = await addBookButton.isVisible();
-//     expect(isAddBookButtonVisible).toBe(true);
-// });
+    // const addBookButton = await page.$('a[href="/profile"]');
+    const myBooksButton = await page.$('a.button[href="/profile"]');
+    const isMyBooksButtonVisible = await myBooksButton.isVisible();
+    expect(isMyBooksButtonVisible).toBe(true);
+
+});
 
 //Verify That the User's Email Address Is Visible 
-// test('Verify That the User\'s Email Address Is Visible', async ({ page }) => {
-//     await page.goto('http://localhost:3000/login');
-//     await page.waitForSelector('nav.navbar');
+test('Verify That the User\'s Email Address Is Visible', async ({ page }) => {
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('nav.navbar');
 
-//     await page.fill('#email', 'petar@abv.bg');
-//     await page.fill('#password', '123456');
-//     await page.click('input[type="submit"]');
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+    await page.click('input[type="submit"]');
 
-//     await page.waitForSelector('div#user span');
+    await page.waitForSelector('div#user span');
 
-//     const userEmailElement = await page.$('div#user span');
-//     const userEmailText = await userEmailElement.innerText();
-//     expect(userEmailText).toContain('petar@abv.bg');
-// });
+    const userEmailElement = await page.$('div#user span');
+    const userEmailText = await userEmailElement.innerText();
+    expect(userEmailText).toContain('petar@abv.bg');
+});
 
-//Submit the Form with Valid Credentials 
+//Login  with Valid Credentials 
 test('Login  with Valid Credentials ', async ({ page }) => {
     await page.goto('http://localhost:3000/login');
 
@@ -105,6 +110,9 @@ test('Login  with Valid Credentials ', async ({ page }) => {
 
     await page.$('a[href="/catalog"]');
     expect(page.url()).toBe('http://localhost:3000/catalog');
+
+    // await page.waitForSelector('a[href="/catalog"]');
+    // expect(page.url()).toBe('http://localhost:3000/catalog');
 });
 
 //Submit the Form with Empty Input Fields 
@@ -121,65 +129,262 @@ test('Submit the Form with Empty Input Fields', async ({ page }) => {
     expect(page.url()).toBe('http://localhost:3000/login');
 });
 
-//Submit the Form with Empty Email Input Field 
+//Submit the Form with Empty Email Input Field
 // test('', async ({ }) => { });
-//Submit the Form with Empty Password Input Field 
+//Submit the Form with Empty Password Input Field
 // test('', async ({ }) => { });
 
 //Register Page
 
-//Submit the Form with Valid Values 
+//Submit the Form with Valid Values
 // test('', async ({ }) => { });
-//Submit the Form with Empty Values 
+//Submit the Form with Empty Values
 // test('', async ({ }) => { });
-//Submit the Form with Empty Email 
+//Submit the Form with Empty Email
 // test('', async ({ }) => { });
 //Submit the Form with Empty Password
 // test('', async ({ }) => { });
-//Submit the Form with Empty Confirm Password 
+//Submit the Form with Empty Confirm Password
 // test('', async ({ }) => { });
-//Submit the Form with Different Passwords 
+//Submit the Form with Different Passwords
 
-//Add Book" Page 
-//Submit the Form with Correct Data 
-// test('', async ({ }) => { });
-//Submit the Form with Empty Title Field 
-// test('', async ({ }) => { });
-//Submit the Form with Empty Description Field 
+//Add Book" Page
 
+//Submit the Form with Correct Data
+test('Submit the Form with Correct Data', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog',)
+
+    ])
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form');
+
+
+    await page.fill('#title', 'Test Book');
+    await page.fill('#description', 'This is a test book description');
+    await page.fill('#image', 'https://expample.com/book-image.jpj');
+
+    await page.selectOption('#type', 'Fiction');
+
+    await page.click('#create-form input[type="submit"]');
+    await page.waitForURL('http://localhost:3000/catalog',)
+
+    expect(page.url()).toBe('http://localhost:3000/catalog')
+
+});
+
+//Submit the Form with Empty Title Field
+test('Submit the Form with Empty Title Field', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+
+    ])
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form');
+
+
+    await page.fill('#description', 'This is a test book description');
+    await page.fill('#image', 'https://expample.com/book-image.jpj');
+
+    await page.selectOption('#type', 'Fiction');
+
+    page.on('dialog', async dialog => {
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain('All fields are required!');
+        await dialog.accept();
+    })
+    await page.$('a[href="/create"]');
+    expect(page.url()).toBe('http://localhost:3000/create');
+});
+
+//Submit the Form with Empty Description Field
+test('Submit the Form with Empty Description Field', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+
+    ])
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form');
+
+    await page.fill('#title', 'Test Book');
+    await page.fill('#image', 'https://expample.com/book-image.jpj');
+
+    await page.selectOption('#type', 'Fiction');
+
+    page.on('dialog', async dialog => {
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain('All fields are required!');
+        await dialog.accept();
+    })
+    await page.$('a[href="/create"]');
+    expect(page.url()).toBe('http://localhost:3000/create');
+
+});
+//Submit the Form with Empty Image URL Field
+test('Submit the Form with Empty Image URL Field', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+
+    ])
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form');
+
+
+    await page.fill('#title', 'Test Book');
+    await page.fill('#description', 'This is a test book description');
+
+
+    await page.selectOption('#type', 'Fiction');
+
+    page.on('dialog', async dialog => {
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain('All fields are required!');
+        await dialog.accept();
+    })
+    await page.$('a[href="/create"]');
+    expect(page.url()).toBe('http://localhost:3000/create');
+
+});
+
+//"All Books" Page
+
+//Verify That All Books Are Displayed
+test('Verify That All Books Are Displayed', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+    ])
+
+    await page.waitForSelector('.dashboard');
+
+    const bookElements = await page.$$('.other-books-list li');
+    expect(bookElements.length).toBeGreaterThan(0)
+});
+//Verify That No Books Are Displayed
+test('Verify That No Books Are Displayed', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+    ])
+
+    await page.waitForSelector('.dashboard');
+
+    const noBooksMessage = await page.textContent('.no-books');
+    expect(noBooksMessage).toBe('No Books in the Database!');
+
+
+});
+
+//"Details" Page
+
+//Verify That Logged-In User Sees Details Button and Button Works Correctly
+test('Verify That Logged-In User Sees Details Button and Button Works Correctly', async ({ page }) => {
+    await page.goto('http://localhost:3000/login');
+
+    await page.fill('#email', 'petar@abv.bg');
+    await page.fill('#password', '123456');
+
+    await Promise.all([
+        page.click('input[type="submit"]'),
+        page.waitForURL('http://localhost:3000/catalog')
+    ])
+
+    await page.click('a[href="/catalog"]');
+    await page.waitForSelector('.otherBooks');
+
+    await page.click('.otherBooks a.button');
+    await page.waitForSelector('.book-information');
+
+    const detailsPageTitle = await page.textContent('.book-information h3');
+    expect(detailsPageTitle).toBe('Test Book');
+
+});
+//Verify That Guest User Sees Details Button and Button Works Correctly
 // test('', async ({ }) => { });
-//Submit the Form with Empty Image URL Field 
+//Verify That All Info Is Displayed Correctly
+// test('', async ({ }) => { });
+//Verify If Edit and Delete Buttons Are Visible for Creator
+// test('', async ({ }) => { });
+//Verify If Edit and Delete Buttons Are Not Visible for Non-Creator
+// test('', async ({ }) => { });
+//Verify If Like Button Is Not Visible for Creator
+// test('', async ({ }) => { });
+//Verify If Like Button Is Visible for Non-Creator
 // test('', async ({ }) => { });
 
-//"All Books" Page 
+//"Logout" Functionality
 
-//Verify That All Books Are Displayed 
-// test('', async ({ }) => { });
-//Verify That No Books Are Displayed 
-// test('', async ({ }) => { });
+//Verify That the "Logout" Button Is Visible
+test('Verify That the "Logout" Button Is Visible', async ({ page }) => {
 
-//"Details" Page 
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('nav.navbar');
 
-//Verify That Logged-In User Sees Details Button and Button Works Correctly 
-// test('', async ({ }) => { });
-//Verify That Guest User Sees Details Button and Button Works Correctly 
-// test('', async ({ }) => { });
-//Verify That All Info Is Displayed Correctly 
-// test('', async ({ }) => { });
-//Verify If Edit and Delete Buttons Are Visible for Creator 
-// test('', async ({ }) => { });
-//Verify If Edit and Delete Buttons Are Not Visible for Non-Creator 
-// test('', async ({ }) => { });
-//Verify If Like Button Is Not Visible for Creator 
-// test('', async ({ }) => { });
-//Verify If Like Button Is Visible for Non-Creator 
-// test('', async ({ }) => { });
+    await page.fill('input[name="email"]', 'petar@abv.bg');
+    await page.fill('input[name="password"]', '123456');
+    await page.click('input[type="submit"]');
 
-//"Logout" Functionality 
+    const logoutLink = await page.$('a[href="javascript:void(0)"] ');
+    const islogoutLinkIsVisible = await logoutLink.isVisible();
+    expect(islogoutLinkIsVisible).toBe(true);
 
-//Verify That the "Logout" Button Is Visible 
-// test('', async ({ }) => { });
+});
+
 //Verify That the "Logout" Button Redirects Correctly
-// test('', async ({ }) => { });
+test('Verify That the "Logout" Button Redirects Correctly', async ({ page }) => {
+
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('nav.navbar');
+
+    await page.fill('input[name="email"]', 'petar@abv.bg');
+    await page.fill('input[name="password"]', '123456');
+    await page.click('input[type="submit"]');
+
+    const logoutLink = await page.$('a[href="javascript:void(0)"] ');
+    await logoutLink.click();
+
+    const redirectedURL = page.url();
+    expect(redirectedURL).toBe('http://localhost:3000/catalog')
+});
 // test('', async ({ }) => { });
 // test('', async ({ }) => { });
