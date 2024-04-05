@@ -29,12 +29,7 @@ jobs:
         
   
     - run: npm install
-    - name: Start Server
-      run: npm start &
-
-    # Wait for a few seconds to allow the server to start up
-    - name: Wait for Server to Start
-      run: sleep 5
-
-    # Finally, run the tests
+    - run: npm start &
+    - run: sleep 5
+  
     - run: npm test
