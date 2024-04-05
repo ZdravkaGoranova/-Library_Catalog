@@ -28,6 +28,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run:  npm install
-    - run: npm start
+   
     - run:  node server.js
     - run: npm test
