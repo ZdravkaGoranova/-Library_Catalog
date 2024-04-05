@@ -140,9 +140,8 @@ test('Login with empty input fields', async ({ page }) => {
 
 //Submit the Form with Correct Data/Add book with correct data
 test('Add book with correct data', async ({ page }) => {
-
     await page.goto('http://localhost:3000/login');
-
+  
     await page.fill('input[name="email"]', 'peter@abv.bg');
     await page.fill('input[name="password"]', '123456');
   
@@ -308,22 +307,24 @@ test('Verify That No Books Are Displayed', async ({ page }) => {
 test('Verify That Logged-In User Sees Details Button and Button Works Correctly', async ({ page }) => {
     await page.goto('http://localhost:3000/login');
 
-    await page.fill('#email', 'petar@abv.bg');
-    await page.fill('#password', '123456');
+  await page.fill('input[name="email"]', 'peter@abv.bg');
+  await page.fill('input[name="password"]', '123456');
 
-    await Promise.all([
-        page.click('input[type="submit"]'),
-        page.waitForURL('http://localhost:3000/catalog')
-    ])
+  await Promise.all([
+    page.click('input[type="submit"]'), 
+    page.waitForURL('http://localhost:3000/catalog')
+  ]);
 
-    await page.click('a[href="/catalog"]');
-    await page.waitForSelector('.otherBooks');
+  await page.click('a[href="/catalog"]');
 
-    await page.click('.otherBooks a.button');
-    await page.waitForSelector('.book-information');
+  await page.waitForSelector('.otherBooks');
 
-    const detailsPageTitle = await page.textContent('.book-information h3');
-    expect(detailsPageTitle).toBe('Test Book');
+  await page.click('.otherBooks a.button');
+
+  await page.waitForSelector('.book-information');
+
+  const detailsPageTitle = await page.textContent('.book-information h3');
+  expect(detailsPageTitle).toBe('Test Book'); 
 
 });
 //Verify That Guest User Sees Details Button and Button Works Correctly
@@ -345,15 +346,16 @@ test('Verify That Logged-In User Sees Details Button and Button Works Correctly'
 test('Verify That the "Logout" Button Is Visible', async ({ page }) => {
 
     await page.goto('http://localhost:3000/login');
-    await page.waitForSelector('nav.navbar');
 
-    await page.fill('input[name="email"]', 'petar@abv.bg');
+    await page.fill('input[name="email"]', 'peter@abv.bg');
     await page.fill('input[name="password"]', '123456');
     await page.click('input[type="submit"]');
-
-    const logoutLink = await page.$('a[href="javascript:void(0)"] ');
-    const islogoutLinkIsVisible = await logoutLink.isVisible();
-    expect(islogoutLinkIsVisible).toBe(true);
+  
+    const logoutLink = await page.$('a[href="javascript:void(0)"]');
+  
+    const isLogoutLinkVisible = await logoutLink.isVisible();
+  
+    expect(isLogoutLinkVisible).toBe(true);
 
 });
 
@@ -361,17 +363,14 @@ test('Verify That the "Logout" Button Is Visible', async ({ page }) => {
 test('Verify That the "Logout" Button Redirects Correctly', async ({ page }) => {
 
     await page.goto('http://localhost:3000/login');
-    await page.waitForSelector('nav.navbar');
 
-    await page.fill('input[name="email"]', 'petar@abv.bg');
+    await page.fill('input[name="email"]', 'peter@abv.bg');
     await page.fill('input[name="password"]', '123456');
     await page.click('input[type="submit"]');
-
-    const logoutLink = await page.$('a[href="javascript:void(0)"] ');
+  
+    const logoutLink = await page.$('a[href="javascript:void(0)"]');
     await logoutLink.click();
-
+  
     const redirectedURL = page.url();
-    expect(redirectedURL).toBe('http://localhost:3000/catalog')
+    expect(redirectedURL).toBe('http://localhost:3000/catalog');
 });
-// test('', async ({ }) => { });
-// test('', async ({ }) => { });
