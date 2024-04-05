@@ -9,9 +9,11 @@ Exercise: CI Workflow
     -  npm start &
     -  sleep 5
     -  npx playwright test ui.test.js
+  ###  ![](/test.jpg)
 
 ###  API Tests for RESTful API 
      - npm install
     -  npm start &
     -  sleep 5
     -  npm test
+  ###  ![](/mocha.jpg)
